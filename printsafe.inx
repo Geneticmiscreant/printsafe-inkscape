@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Print-Safe (CMYK Lock)</name>
+  <id>org.lens.printsafe.user1</id>
+
+  <!-- Inputs -->
+  <param name="icc_path" type="path" mode="file" _gui-text="CMYK ICC profile (.icc/.icm)">
+    <filter>*.icc;*.icm</filter>
+  </param>
+
+  <param name="flag_width_px" type="int" min="1" max="20" _gui-text="Flag stroke width (px)">6</param>
+
+  <!-- Palette options -->
+  <param name="palette_name" type="string" _gui-text="Palette name">PrintSafe</param>
+  <param name="palette_density" type="optiongroup" appearance="combo" _gui-text="Palette density">
+    <option value="5">Medium (5×5×5)</option>
+    <option value="7">High (7×7×7)</option>
+    <option value="9">Ultra (9×9×9)</option>
+  </param>
+  <param name="include_gray" type="boolean" _gui-text="Add gray ramp">true</param>
+  <param name="include_skin" type="boolean" _gui-text="Add skin anchors">true</param>
+
+  <!-- Action -->
+  <param name="action" type="optiongroup" appearance="radio" _gui-text="Action">
+    <option value="validate">Validate colors</option>
+    <option value="palette">Generate palette</option>
+    <option value="clamp">Clamp colors (in-place)</option>
+    <option value="clear">Clear flags</option>
+  </param>
+
+  <!-- Menu placement -->
+  <effect needs-document="true">
+    <object-type>all</object-type>
+    <effects-menu><submenu name="Print"/></effects-menu>
+  </effect>
+
+  <!-- IMPORTANT: script must be outside <effect> -->
+  <script>
+    <command reldir="extensions" interpreter="python">printsafe.py</command>
+  </script>
+</inkscape-extension>
